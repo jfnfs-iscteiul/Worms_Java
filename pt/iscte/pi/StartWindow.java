@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class StartWindow {
 
@@ -56,14 +58,40 @@ public class StartWindow {
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Quit");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				frame.dispose();
+			}
+		});
 		btnNewButton.setBounds(99, 172, 127, 39);
 		panel.add(btnNewButton);
 		
 		JButton btnOptions = new JButton("Options");
+		btnOptions.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		btnOptions.setBounds(99, 120, 127, 39);
 		panel.add(btnOptions);
 		
 		JButton btnStartNewGame = new JButton("Start New Game");
+		btnStartNewGame.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				frame.dispose();
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							new GameWindow();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		btnStartNewGame.setBounds(99, 68, 127, 39);
 		panel.add(btnStartNewGame);
 	}
